@@ -1,17 +1,18 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, output } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, input, model, output,numberAttribute } from '@angular/core';
 import { createContact, createTel } from '../../helpers';
 import { __values } from 'tslib';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dynamic-tel',
-  imports: [],
+  imports: [DecimalPipe],
   templateUrl: './dynamic-tel.html',
   styleUrl: './dynamic-tel.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicTel {
 
-  readonly number = input<number |null>(null);
+  readonly number = input(NaN, { transform: numberAttribute });
   readonly contact = model(createContact());
   readonly removable = input(true,{ transform: booleanAttribute});
 
